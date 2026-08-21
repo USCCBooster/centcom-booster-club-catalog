@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CENTCOM Booster Club — Catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-black:   #0b0f0a;
+    --panel-black: #12160f;
+    --green-deep:  #1a2b10;
+    --green-mid:   #2d4a1a;
+    --green-bright:#7cb342;
+    --olive:       #5c6b4f;
+    --paper:       #f6f3ec;
+    --ink:         #131313;
+    --ink-soft:    #4a4f57;
+    --red-tag:     #c0392b;
+    --line:        rgba(12,20,10,0.14);
+
+    --cat-gear:    #2d5f1e;
+    --cat-collect: #8a7420;
+    --cat-patches: #1b2a6b;
+    --cat-gifts:   #4a332a;
+    --cat-partner: #c76a1f;
+    --cat-clearance: #c0392b;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--green-bright); color:#0b0f0a; }
+
+  /* ---------- ANNOUNCEMENTS ---------- */
+  .announce-bar{
+    background:#000;
+    border-bottom:1px solid rgba(124,179,66,0.25);
+    padding:7px 24px;
+    overflow:hidden;
+  }
+  .announce-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; align-items:center; gap:14px;
+  }
+  .announce-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--green-bright);
+    border:1px solid rgba(124,179,66,0.4);
+    padding:2px 7px;
+    border-radius:2px;
+    flex-shrink:0;
+  }
+  .announce-track{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 28px;
+    overflow:hidden;
+  }
+  .announce-item{
+    font-family:'Inter', sans-serif;
+    font-size:12.5px;
+    color:#cdd6c4;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  /* ---------- CASH BANNER ---------- */
+  .cash-banner{
+    background:var(--green-bright);
+    color:#0b0f0a;
+    text-align:center;
+    padding:10px 16px;
+    font-family:'Oswald', Impact, 'Arial Narrow', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .cash-banner .sep{ opacity:.55; font-weight:400; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(1000px 460px at 12% -10%, rgba(124,179,66,0.14), transparent 60%),
+      linear-gradient(180deg, var(--ink-black) 0%, var(--panel-black) 100%);
+    color:#e8ede2;
+    padding:40px 24px 36px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:4px solid var(--green-bright);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(30deg, rgba(124,179,66,.09) 12%, transparent 12.5%, transparent 87%, rgba(124,179,66,.09) 87.5%, rgba(124,179,66,.09)),
+      linear-gradient(150deg, rgba(124,179,66,.09) 12%, transparent 12.5%, transparent 87%, rgba(124,179,66,.09) 87.5%, rgba(124,179,66,.09)),
+      linear-gradient(30deg, rgba(124,179,66,.09) 12%, transparent 12.5%, transparent 87%, rgba(124,179,66,.09) 87.5%, rgba(124,179,66,.09)),
+      linear-gradient(150deg, rgba(124,179,66,.09) 12%, transparent 12.5%, transparent 87%, rgba(124,179,66,.09) 87.5%, rgba(124,179,66,.09)),
+      linear-gradient(60deg, rgba(124,179,66,.07) 25%, transparent 25.5%, transparent 75%, rgba(124,179,66,.07) 75%, rgba(124,179,66,.07)),
+      linear-gradient(60deg, rgba(124,179,66,.07) 25%, transparent 25.5%, transparent 75%, rgba(124,179,66,.07) 75%, rgba(124,179,66,.07));
+    background-size:44px 76px;
+    background-position:0 0, 0 0, 22px 38px, 22px 38px, 0 0, 22px 38px;
+    pointer-events:none;
+  }
+  .hero-inner{ max-width:1100px; margin:0 auto; position:relative; display:flex; align-items:center; gap:28px; }
+  .seal-wrap{
+    flex-shrink:0;
+    width:150px; height:150px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, rgba(124,179,66,0.12), transparent 70%);
+    padding:4px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .seal-wrap img{
+    width:100%; height:100%;
+    object-fit:contain;
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+  }
+  .hero-text{ flex:1; min-width:0; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--green-bright);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--green-bright);
+    box-shadow:0 0 0 3px rgba(124,179,66,0.25);
+  }
+  h1.hero-title{
+    font-family:'Oswald', Impact, 'Arial Narrow', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    font-size:clamp(34px, 6vw, 58px);
+    letter-spacing:.01em;
+    line-height:1.02;
+    margin:0 0 14px;
+    color:#f4f6ef;
+  }
+  .hero-title span{ color:var(--green-bright); }
+  .hero-sub{
+    max-width:560px;
+    font-size:16px;
+    line-height:1.6;
+    color:#c3ccbb;
+    margin:0 0 28px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:8px 14px;
+    border:1px solid rgba(124,179,66,0.3);
+    border-radius:2px;
+    color:#dce4d4;
+    background:rgba(124,179,66,0.05);
+  }
+  .chip strong{ color:var(--green-bright); font-weight:700; }
+  .chip.hours-chip{
+    background:rgba(124,179,66,0.14);
+    border-color:var(--green-bright);
+    color:#f4f6ef;
+  }
+  .chip.hours-chip strong{ color:#f4f6ef; }
+
+  /* ---------- NAV / FILTERS ---------- */
+  .filter-bar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,243,236,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:14px 24px;
+  }
+  .filter-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; align-items:center; gap:10px;
+    flex-wrap:wrap;
+  }
+  .filter-inner input[type="search"]{
+    flex:1 1 220px;
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    padding:10px 14px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    background:#fff;
+    color:var(--ink);
+    outline:none;
+  }
+  .filter-inner input[type="search"]:focus{
+    border-color:var(--green-mid);
+  }
+  .cat-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:10px 14px;
+    border:1px solid var(--line);
+    border-radius:2px;
+    background:#fff;
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:.15s ease;
+    white-space:nowrap;
+  }
+  .cat-btn:hover{ border-color:var(--green-mid); color:var(--green-deep); }
+  .cat-btn.active{
+    background:var(--ink-black);
+    border-color:var(--ink-black);
+    color:var(--green-bright);
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .catalog{ max-width:1100px; margin:0 auto; padding:44px 24px 100px; }
+  .section{ margin-bottom:58px; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:20px;
+    border-bottom:3px solid var(--cat-color, var(--green-deep));
+    padding-bottom:12px;
+  }
+  .section-head h2{
+    font-family:'Oswald', Impact, 'Arial Narrow', sans-serif;
+    font-size:26px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    margin:0;
+    color:var(--cat-color, var(--green-deep));
+  }
+  .section-head .count{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  .subgroup{ margin-bottom:28px; }
+  .subgroup:last-child{ margin-bottom:0; }
+  .subhead{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--olive);
+    margin:0 0 12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .subhead::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .subhead{ color:var(--cat-color, var(--olive)); }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:18px;
+  }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:3px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(12,28,46,0.10);
+  }
+
+  .card-photo{
+    aspect-ratio:1/1;
+    background:#ffffff;
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(20,40,66,0.4);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .card-photo img{
+    width:100%; height:100%;
+    object-fit:contain;
+    object-position:center;
+    padding:6px;
+    display:block;
+  }
+  .sale-ribbon{
+    position:absolute;
+    top:14px; left:-40px;
+    width:170px;
+    text-align:center;
+    background:var(--red-tag);
+    color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:4px 0;
+    transform:rotate(-38deg);
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    z-index:2;
+  }
+  .soon-ribbon{
+    position:absolute;
+    top:14px; left:-40px;
+    width:170px;
+    text-align:center;
+    background:var(--green-bright);
+    color:#0b0f0a;
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    padding:4px 0;
+    transform:rotate(-38deg);
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    z-index:2;
+    white-space:nowrap;
+  }
+  .card-photo .initial{
+    font-family:'Oswald', Impact, 'Arial Narrow', sans-serif;
+    font-size:46px;
+    color:rgba(20,40,66,0.18);
+    font-weight:600;
+  }
+  .card-photo .tag{
+    position:absolute;
+    bottom:8px; left:8px;
+    font-size:9.5px;
+    color:rgba(20,40,66,0.35);
+  }
+  .card.partner .card-photo{
+    background:#ffffff;
+    border-bottom-color:rgba(199,106,31,0.2);
+  }
+
+  .card-body{
+    padding:16px 18px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    flex:1;
+  }
+  .card-name{
+    font-family:'Oswald', Impact, 'Arial Narrow', sans-serif;
+    font-size:16.5px;
+    font-weight:600;
+    letter-spacing:.01em;
+    color:var(--ink-black);
+    line-height:1.32;
+  }
+  .card-sub{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    line-height:1.4;
+  }
+  .swatches{
+    display:flex; gap:6px; flex-wrap:wrap; margin-top:2px;
+    align-items:center;
+  }
+  .swatch{
+    width:15px; height:15px;
+    border-radius:50%;
+    border:1.5px solid rgba(0,0,0,0.28);
+    flex-shrink:0;
+  }
+  .card-footer{
+    margin-top:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+    padding-top:10px;
+    border-top:1px dashed var(--line);
+  }
+  .price{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:15px;
+    color:var(--ink-black);
+  }
+  .price.numeric::before{ content:"$"; opacity:.55; margin-right:1px; }
+  .price.label{ font-size:12px; font-weight:600; }
+  .price.tbd{ color:var(--ink-soft); font-style:italic; }
+  .stock-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--olive);
+    line-height:1.5;
+  }
+
+  .empty-state{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink-black);
+    color:#a9b39d;
+    padding:36px 24px;
+    text-align:center;
+    border-top:3px solid var(--green-bright);
+  }
+  footer .foot-inner{ max-width:1100px; margin:0 auto; }
+  footer p{ margin:4px 0; font-size:13px; }
+  footer .foot-brand{
+    font-family:'Oswald', Impact, 'Arial Narrow', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--green-bright);
+    font-size:14px;
+    margin-bottom:8px;
+  }
+  footer .foot-stars{
+    color:var(--green-bright);
+    font-size:15px;
+    letter-spacing:.5em;
+    margin-top:14px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .card{ transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  @media (max-width:560px){
+    .hero{ padding:48px 18px 32px; }
+    .catalog{ padding:32px 16px 80px; }
+    .grid{ grid-template-columns:repeat(auto-fill, minmax(165px, 1fr)); gap:12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="announce-bar" id="announceBar">
+  <div class="announce-inner">
+    <span class="announce-label">Announcements</span>
+    <div class="announce-track">
+      <span class="announce-item">📣 We're looking for a few good volunteers — no combat experience required, just the ability to make change and smile.</span>
+      <span class="announce-item">🪙 CENTCOM OG Coin is currently out of stock — restock coming soon!</span>
+    </div>
+  </div>
+</div>
+
+<div class="cash-banner">
+  <span>💵 Cash Only</span><span class="sep">•</span><span>No Online Purchases</span><span class="sep">•</span><span>In-Store Pickup Only</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="seal-wrap"><img src="images/centcom-seal.png" alt="United States Central Command Seal"></div>
+    <div class="hero-text">
+      <div class="eyebrow"><span class="dot"></span> Browse before you walk in</div>
+      <h1 class="hero-title">CENTCOM<br><span>Booster Club</span> Catalog</h1>
+      <p class="hero-sub">Browse what's on the shelf before you head in. Whole-dollar pricing, no coins needed.</p>
+      <div class="hero-meta">
+        <div class="chip"><strong id="item-count">—</strong> Items Listed</div>
+        <div class="chip"><strong>6</strong> Categories</div>
+        <div class="chip hours-chip">🕐 Open <strong>Tue &amp; Thu</strong> · 1100–1200</div>
+        <div class="chip">Updated <strong id="update-date"></strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-inner">
+    <input type="search" id="searchInput" placeholder="Search the catalog...">
+    <button class="cat-btn active" data-cat="all">All</button>
+    <button class="cat-btn" data-cat="gear">CENTCOM Gear</button>
+    <button class="cat-btn" data-cat="collectibles">Collectibles</button>
+    <button class="cat-btn" data-cat="patches">Command Patches</button>
+    <button class="cat-btn" data-cat="gifts">Gifts &amp; Specialties</button>
+    <button class="cat-btn" data-cat="partner">Partner Orgs</button>
+    <button class="cat-btn" data-cat="clearance">Clearance</button>
+  </div>
+</div>
+
+<div class="catalog" id="catalog"></div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">CENTCOM Booster Club</div>
+    <p>Prices and availability subject to change. See a volunteer in-store for current stock.</p>
+    <p>This catalog is for browsing only — no purchases or reservations are made online.</p>
+    <div class="foot-stars">★ ★ ★ ★</div>
+  </div>
+</footer>
+
+<script>
+const ITEMS = [
+  // ============ CENTCOM GEAR — T-Shirts ============
+  { cat:"gear", sub:"T-Shirts", name:"CENTCOM T-Shirt — Coyote Brown", desc:"Army / Air Force uniform undershirt",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#8a6a45"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", photo:"gear-tshirt-coyote" },
+  { cat:"gear", sub:"T-Shirts", name:"CENTCOM T-Shirt — Woodland Brown", desc:"Navy uniform undershirt",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#5c4a35"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", photo:"gear-tshirt-woodland" },
+  { cat:"gear", sub:"T-Shirts", name:"CENTCOM T-Shirt — Olive Green", desc:"Marine Corps uniform undershirt",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#5c6b4f"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", photo:"gear-tshirt-olive" },
+  { cat:"gear", sub:"T-Shirts", name:"CENTCOM T-Shirt — Neon Pink", desc:"Short sleeve, CENTCOM logo",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#ff5fa2"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", photo:"gear-tshirt-pink" },
+  { cat:"gear", sub:"T-Shirts", name:"CENTCOM T-Shirt — Light Blue", desc:"Short sleeve, CENTCOM logo",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#a9cce3"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", photo:"gear-tshirt-lightblue" },
+  { cat:"gear", sub:"T-Shirts", name:"CENTCOM T-Shirt — Graphite Heather Gray", desc:"Short sleeve, CENTCOM logo",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#6e7275"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", photo:"gear-tshirt-graphite" },
+  { cat:"gear", sub:"T-Shirts", name:"CENTCOM T-Shirt — Black", desc:"Short sleeve, CENTCOM logo",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#1a1a1a"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", photo:"gear-tshirt-black" },
+
+  // -- Tops --
+  { cat:"gear", sub:"Tops", name:"CENTCOM Hoodie — Charcoal", desc:"Polyester, CENTCOM logo",
+    price:40, swatches:["#3b3b3b"], loc:"Clothing Rack — CENTCOM Tops Divider", photo:"gear-hoodie" },
+  { cat:"gear", sub:"Tops", name:"CENTCOM Hawaiian T-Shirt", desc:"CENTCOM branded",
+    price:75, loc:"Clothing Rack — CENTCOM Tops Divider", photo:"gear-hawaiian" },
+
+  // -- Polos --
+  { cat:"gear", sub:"Polos", name:"CENTCOM Men's Callaway Mesh Polo", desc:"CGM451SU performance polo, CENTCOM logo",
+    price:40, swatches:["#7D818B","#FF0000","#0F253F","#00B0F0","#FFFFFF"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-callaway" },
+  { cat:"gear", sub:"Polos", name:"CENTCOM Men's Team 365 Performance Polo", desc:"Team365 TT51 performance polo, CENTCOM logo",
+    price:30, swatches:["#FF0000","#064737","#193EA3","#FFFFFF"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-team365" },
+  { cat:"gear", sub:"Polos", name:"CENTCOM Men's Core 365 Performance Polo", desc:"Core365 88181 performance polo, CENTCOM logo",
+    price:30, swatches:["#0E0E0E","#310716","#B97135"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-core365" },
+  { cat:"gear", sub:"Polos", name:"CENTCOM Women's Stretch Piqué Polo", desc:"P&C LK560 performance polo, CENTCOM logo",
+    price:35, swatches:["#0E0E0E","#683164"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-womens" },
+  { cat:"gear", sub:"Polos", name:"CENTCOM Men's OGIO Performance Polo", desc:"OGIO Caliber 2.0 performance polo, CENTCOM logo",
+    price:40, swatches:["#646568","#B32434","#292946","#0D0D0D"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-ogio" },
+
+  // -- Headwear --
+  { cat:"gear", sub:"Headwear", name:"Navy Ball Cap", desc:"Standard issue style, CENTCOM logo",
+    price:25, swatches:["#142842"], loc:"Display Case", photo:"gear-ballcap" },
+  { cat:"gear", sub:"Headwear", name:"Navy Ball Cap — Single Scramble", desc:"Officer-style single scramble brim",
+    price:35, swatches:["#142842"], loc:"Display Case", photo:"gear-ballcap-single" },
+  { cat:"gear", sub:"Headwear", name:"Navy Ball Cap — Double Scramble", desc:"Senior officer-style double scramble brim",
+    price:40, swatches:["#142842"], loc:"Display Case", photo:"gear-ballcap-double" },
+  { cat:"gear", sub:"Headwear", name:"CENTCOM Trucker Hat — Gray", desc:"Adjustable, CENTCOM logo",
+    price:20, swatches:["#9ea3a8"], loc:"Display Case", photo:"gear-trucker-gray-1" },
+  { cat:"gear", sub:"Headwear", name:"CENTCOM Trucker Hat — Gray", desc:"Adjustable, CENTCOM logo",
+    price:20, swatches:["#9ea3a8"], loc:"Display Case", photo:"gear-trucker-gray-2" },
+
+  // -- Bags --
+  { cat:"gear", sub:"Bags", name:"Handbag / Duffle Bag", desc:"CENTCOM branded",
+    price:30, loc:"Display Case", photo:"gear-duffle" },
+
+  // -- Accessories --
+  { cat:"gear", sub:"Accessories", name:"Faraday Bag", desc:"Signal-blocking pouch for cellphones",
+    price:10, loc:"Display Case", photo:"gear-faraday" },
+  { cat:"gear", sub:"Accessories", name:"Standard Lanyard", desc:"Nylon, CENTCOM logo — for badges",
+    price:5, swatches:["#DB0915","#FA3E6B","#FE4A01","#351350","#76C665","#012B84","#7E0714"], loc:"Wall Hook", photo:"gear-lanyard-standard" },
+  { cat:"gear", sub:"Accessories", name:"Paracord Lanyard", desc:"Paracord style, Service / CENTCOM branded — for badges",
+    price:45, swatches:["#000000","linear-gradient(135deg,#000000 50%,#c9b28a 50%)","#002991","#DF0201","#0F253F"], loc:"Wall Hook", photo:"gear-lanyard-paracord" },
+
+  // ============ COLLECTIBLES ============
+  { cat:"collectibles", sub:"Coins", name:"CENTCOM OG Coin", desc:"CENTCOM challenge coin — 2.5 inches",
+    price:20, loc:"Display Case", photo:"collect-og-coin", comingSoon:true },
+  { cat:"collectibles", sub:"Coins", name:"Gator Coin", desc:"CENTCOM Gator challenge coin — 3 inches",
+    price:25, loc:"Display Case", photo:"collect-gator-coin" },
+  { cat:"collectibles", sub:"Coins", name:"Year of the Hammer Coin", desc:"Limited edition CENTCOM coin — 2.5 inches",
+    price:20, loc:"Display Case", photo:"collect-hammer-coin" },
+
+  { cat:"collectibles", sub:"Medallion", name:"CENTCOM Emblem Medallion", desc:"CENTCOM emblem commemorative medallion",
+    price:10, loc:"Display Case", photo:"collect-medallion" },
+
+  { cat:"collectibles", sub:"Stickers", name:"CENTCOM Emblem Sticker", desc:"Vinyl CENTCOM logo sticker",
+    price:1, loc:"Display Case", photo:"collect-sticker-emblem" },
+  { cat:"collectibles", sub:"Stickers", name:"CENTCOM 'USCC' Sticker", desc:"Vinyl CENTCOM sticker",
+    price:2, loc:"Display Case", photo:"collect-sticker-uscc" },
+  { cat:"collectibles", sub:"Stickers", name:"Rising 6 Sticker", desc:"Vinyl Rising 6 sticker",
+    price:1, loc:"Display Case", photo:"collect-sticker-rising6" },
+
+  // ============ COMMAND PATCHES ============
+  { cat:"patches", sub:"Patches", name:"CENTCOM Patch — Color", desc:"Full color embroidered CENTCOM patch — 3 inches",
+    price:8, loc:"Display Case", photo:"patch-color" },
+  { cat:"patches", sub:"Patches", name:"AF Element Patch — Brown", desc:"Air Force element subdued patch — 3½ inches",
+    price:8, loc:"Display Case", photo:"patch-af-brown" },
+  { cat:"patches", sub:"Patches", name:"AF Element Patch — Color", desc:"Air Force element full color patch — 3½ inches",
+    price:8, loc:"Display Case", photo:"patch-af-color" },
+  { cat:"patches", sub:"Patches", name:"Navy Element Patch", desc:"Navy element embroidered patch",
+    price:8, loc:"Display Case", photo:"patch-navy" },
+  { cat:"patches", sub:"Patches", name:"CENTCOM Yellow Sword Patch", desc:"Yellow sword flight embroidered patch",
+    price:8, loc:"Display Case", photo:"patch-yellowsword" },
+
+  // ============ GIFTS & SPECIALTIES ============
+  { cat:"gifts", sub:"Accessories", name:"Tie Clip | Label Pin", desc:"CENTCOM logo tie clip",
+    price:5, loc:"Display Case", photo:"gift-tieclip" },
+  { cat:"gifts", sub:"Accessories", name:"Lighter", desc:"CENTCOM branded lighter",
+    price:10, loc:"Display Case", photo:"gift-lighter" },
+  { cat:"gifts", sub:"Accessories", name:"Cigar Cutter", desc:"CENTCOM branded cigar cutter",
+    price:10, loc:"Display Case", photo:"gift-cigarcutter" },
+  { cat:"gifts", sub:"Accessories", name:"Keychain — D-Clamp", desc:"Carabiner keychain, CENTCOM logo",
+    price:5, loc:"Display Case", photo:"gift-keychain" },
+
+  { cat:"gifts", sub:"Glassware", name:"Shot Glass — Single", desc:"Single shot glass (1oz), CENTCOM logo",
+    price:5, loc:"Display Case", photo:"gift-shotglass-single" },
+  { cat:"gifts", sub:"Glassware", name:"Shot Glass — Double", desc:"Double shot glass (2oz), CENTCOM logo",
+    price:10, loc:"Display Case", photo:"gift-shotglass-double" },
+  { cat:"gifts", sub:"Glassware", name:"Whiskey Glass", desc:"Rocks glass, CENTCOM logo",
+    price:10, loc:"Display Case", photo:"gift-whiskeyglass" },
+  { cat:"gifts", sub:"Glassware", name:"Beer Glass", desc:"Pint glass, CENTCOM logo",
+    price:10, loc:"Display Case", photo:"gift-beerglass" },
+
+  { cat:"gifts", sub:"Drinkware", name:"Tumbler", desc:"Stainless steel, CENTCOM logo",
+    price:20, loc:"Display Case", photo:"gift-tumbler" },
+  { cat:"gifts", sub:"Drinkware", name:"Coffee Mug", desc:"Ceramic, CENTCOM logo",
+    price:10, loc:"Display Case", photo:"gift-mug" },
+  { cat:"gifts", sub:"Drinkware", name:"Koozie", desc:"Neoprene can cooler, CENTCOM logo",
+    price:5, loc:"Display Case", photo:"gift-koozie" },
+  { cat:"gifts", sub:"Drinkware", name:"CENTCOM Engraved Stainless Steel Flask", desc:"Brushed stainless steel, engraved CENTCOM logo",
+    price:12, loc:"Display Case", photo:"gift-flask" },
+
+  { cat:"gifts", sub:"Home", name:"Bamboo Coaster", desc:"Bamboo coaster, CENTCOM logo",
+    price:5, loc:"Display Case", photo:"gift-coaster-bamboo" },
+  { cat:"gifts", sub:"Home", name:"Cork Coaster", desc:"Cork coaster, CENTCOM logo",
+    price:5, loc:"Display Case", photo:"gift-coaster-cork" },
+
+  { cat:"gifts", sub:"Tools", name:"Multi-Tool Bottle Opener", desc:"Multi-function tool with bottle opener",
+    price:12, loc:"Display Case", photo:"gift-multitool" },
+  { cat:"gifts", sub:"Tools", name:"Stainless Steel Bottle Opener", desc:"Stainless steel bottle opener, CENTCOM logo",
+    price:10, loc:"Display Case", photo:"gift-bottleopener" },
+  { cat:"gifts", sub:"Tools", name:"Gerber Mini Tactical Folding Knife", desc:"Gerber brand mini tactical knife",
+    price:30, loc:"Display Case", photo:"gift-knife" },
+
+  // ============ PARTNER ORGS ============
+  { cat:"partner", sub:"FCPOA", name:"FCPOA — Laying the Keel Brown T-Shirt", desc:"First Class Petty Officers Association shirt",
+    priceLabel:"Ask in store", swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-layingkeel" },
+  { cat:"partner", sub:"FCPOA", name:"FCPOA — Old No. 1 Brown T-Shirt", desc:"First Class Petty Officers Association shirt",
+    priceLabel:"Ask in store", swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-oldno1" },
+  { cat:"partner", sub:"FCPOA", name:"FCPOA — First to Lead First to Fight T-Shirt", desc:"First Class Petty Officers Association shirt",
+    priceLabel:"Ask in store", swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-firsttolead" },
+  { cat:"partner", sub:"Rising 6", name:"RISING 6 T-Shirt — Black", desc:"Short sleeve, RISING 6 logo",
+    priceLabel:"1 x $20 / 2 x $30", swatches:["#1a1a1a"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", partner:true, photo:"partner-rising6-tshirt" },
+
+  // ============ CLEARANCE ============
+  { cat:"clearance", sub:"Clearance Items", name:"CENTCOM Yellow Sword T-Shirt — Black", desc:"Short sleeve, CENTCOM Yellow Sword logo",
+    price:5, swatches:["#1a1a1a"], loc:"Clothing Rack — Clearance Divider", clearance:true, photo:"clearance-yellowsword-tee" },
+  { cat:"clearance", sub:"Clearance Items", name:"CENTCOM Army T-Shirt — Black", desc:"Short sleeve, polyester Army / CENTCOM logo",
+    price:5, swatches:["#1a1a1a"], loc:"Clothing Rack — Clearance Divider", clearance:true, photo:"clearance-army-tee" },
+  { cat:"clearance", sub:"Clearance Items", name:"CENTCOM 40th Anniversary Polo / Older Polos", desc:"Performance polo, CENTCOM logo",
+    price:10, colorNote:true, loc:"Clothing Rack — Clearance Divider", clearance:true },
+];
+
+const CAT_LABELS = {
+  gear: "CENTCOM Gear",
+  collectibles: "Collectibles",
+  patches: "Command Patches",
+  gifts: "Gifts & Specialties",
+  partner: "Partner Organizations",
+  clearance: "Clearance"
+};
+const CAT_COLORS = {
+  gear: "#2d5f1e",
+  collectibles: "#8a7420",
+  patches: "#1b2a6b",
+  gifts: "#4a332a",
+  partner: "#c76a1f",
+  clearance: "#c0392b"
+};
+const CAT_ORDER = ["gear","collectibles","patches","gifts","partner","clearance"];
+
+const catalogEl = document.getElementById('catalog');
+const searchInput = document.getElementById('searchInput');
+const catButtons = document.querySelectorAll('.cat-btn');
+let activeCat = 'all';
+
+function initialLetter(name){ return name.trim().charAt(0).toUpperCase(); }
+
+function priceHTML(item){
+  if(item.priceLabel){
+    const isTbd = item.priceLabel.toLowerCase().includes('ask');
+    return `<span class="price label ${isTbd ? 'tbd' : ''}">${item.priceLabel}</span>`;
+  }
+  return `<span class="price numeric">${item.price}</span>`;
+}
+
+function cardHTML(item){
+  const swatches = (item.swatches||[]).map(c => `<span class="swatch" style="background:${c}"></span>`).join('');
+  const colorNote = item.colorNote ? `<div class="card-sub" style="font-style:italic;">Colors vary — ask a volunteer</div>` : ``;
+  const photoHTML = item.photo
+    ? `<img src="images/${item.photo}.jpg" alt="${item.name}" loading="lazy">`
+    : `<span class="initial">${initialLetter(item.name)}</span><span class="tag">photo pending</span>`;
+  const ribbon = item.clearance ? `<div class="sale-ribbon">Sale</div>` : (item.comingSoon ? `<div class="soon-ribbon">Coming Soon</div>` : ``);
+  return `
+    <div class="card ${item.partner ? 'partner' : ''}" data-cat="${item.cat}" data-name="${(item.name+' '+item.desc).toLowerCase()}">
+      <div class="card-photo">
+        ${ribbon}
+        ${photoHTML}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${item.name}</div>
+        <div class="card-sub">${item.desc}</div>
+        ${swatches ? `<div class="swatches">${swatches}</div>` : ``}
+        ${colorNote}
+        <div class="card-footer">
+          ${priceHTML(item)}
+          <span class="stock-note">${item.loc}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function subgroupHTML(subName, items){
+  return `
+    <div class="subgroup">
+      <div class="subhead">${subName}</div>
+      <div class="grid">${items.map(cardHTML).join('')}</div>
+    </div>
+  `;
+}
+
+function render(){
+  const q = searchInput.value.trim().toLowerCase();
+  catalogEl.innerHTML = '';
+
+  let anyResults = false;
+  let totalShown = 0;
+
+  CAT_ORDER.forEach(cat => {
+    if(activeCat !== 'all' && activeCat !== cat) return;
+    let items = ITEMS.filter(i => i.cat === cat);
+    if(q) items = items.filter(i => i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || i.sub.toLowerCase().includes(q));
+    if(items.length === 0) return;
+
+    anyResults = true;
+    totalShown += items.length;
+
+    // group by subcategory, preserving first-seen order
+    const subOrder = [];
+    const bySub = {};
+    items.forEach(i => {
+      if(!bySub[i.sub]){ bySub[i.sub] = []; subOrder.push(i.sub); }
+      bySub[i.sub].push(i);
+    });
+
+    const section = document.createElement('div');
+    section.className = 'section' + (cat === 'partner' ? ' partner' : '') + (cat === 'clearance' ? ' clearance' : '');
+    section.style.setProperty('--cat-color', CAT_COLORS[cat]);
+    section.innerHTML = `
+      <div class="section-head">
+        <h2>${CAT_LABELS[cat]}</h2>
+        <span class="count">${items.length} item${items.length !== 1 ? 's' : ''}</span>
+      </div>
+      ${subOrder.map(s => subgroupHTML(s, bySub[s])).join('')}
+    `;
+    catalogEl.appendChild(section);
+  });
+
+  if(!anyResults){
+    catalogEl.innerHTML = `<div class="empty-state">No items match "${q}". Try a different search or category.</div>`;
+  }
+}
+
+catButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    catButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    render();
+  });
+});
+searchInput.addEventListener('input', render);
+
+document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+document.getElementById('item-count').textContent = ITEMS.length;
+
+render();
+</script>
+
+</body>
+</html>
