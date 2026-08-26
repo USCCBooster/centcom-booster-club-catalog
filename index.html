@@ -41,6 +41,33 @@
 
   ::selection{ background:var(--green-bright); color:#0b0f0a; }
 
+  /* ---------- FLOATING VOLUNTEER BADGE ---------- */
+  .volunteer-float{
+    position:fixed;
+    top:14px;
+    right:16px;
+    z-index:100;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.03em;
+    color:#0b0f0a;
+    background:var(--green-bright);
+    padding:8px 14px;
+    border-radius:20px;
+    text-decoration:none;
+    box-shadow:0 3px 10px rgba(0,0,0,0.3);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .volunteer-float:hover{
+    transform:translateY(-1px);
+    box-shadow:0 5px 14px rgba(0,0,0,0.35);
+    background:#8fcc52;
+  }
+
   /* ---------- ANNOUNCEMENTS ---------- */
   .announce-bar{
     background:#000;
@@ -53,12 +80,12 @@
   }
   .announce-label{
     font-family:'JetBrains Mono', monospace;
-    font-size:9.5px;
+    font-size:10.5px;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:var(--green-bright);
     border:1px solid rgba(124,179,66,0.4);
-    padding:2px 7px;
+    padding:3px 8px;
     border-radius:2px;
     flex-shrink:0;
     margin-top:1px;
@@ -72,9 +99,9 @@
   }
   .announce-item{
     font-family:'Inter', sans-serif;
-    font-size:12.5px;
+    font-size:14.5px;
     color:#cdd6c4;
-    line-height:1.4;
+    line-height:1.45;
   }
 
   /* ---------- CASH BANNER ---------- */
@@ -468,6 +495,22 @@
     letter-spacing:.5em;
     margin-top:14px;
   }
+  footer .volunteer-link{
+    display:inline-block;
+    margin-top:18px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.03em;
+    color:#0b0f0a;
+    background:var(--green-bright);
+    padding:9px 18px;
+    border-radius:2px;
+    text-decoration:none;
+    font-weight:700;
+  }
+  footer .volunteer-link:hover{
+    background:#8fcc52;
+  }
 
   @media (prefers-reduced-motion: reduce){
     .card{ transition:none; }
@@ -480,12 +523,15 @@
     .seal-wrap{ width:96px; height:96px; }
     .catalog{ padding:32px 16px 80px; }
     .grid{ grid-template-columns:repeat(auto-fill, minmax(165px, 1fr)); gap:12px; }
-    .announce-bar{ padding:8px 16px; }
+    .announce-bar{ padding:8px 16px; padding-right:104px; }
     .announce-inner{ flex-direction:column; gap:6px; }
+    .volunteer-float{ font-size:10.5px; padding:6px 10px; top:8px; right:8px; }
   }
 </style>
 </head>
 <body>
+
+<a class="volunteer-float" href="https://docs.google.com/forms/d/e/1FAIpQLSdwrgISzyXLW6_xjTb3Oxq8M2ld_xhMZnEUfjzNbhefNVmTvA/viewform" target="_blank" rel="noopener">📋 Volunteer</a>
 
 <div class="announce-bar" id="announceBar">
   <div class="announce-inner">
@@ -538,6 +584,7 @@
     <div class="foot-brand">CENTCOM Booster Club</div>
     <p>Prices and availability subject to change. See a volunteer in-store for current stock.</p>
     <p>This catalog is for browsing only — no purchases or reservations are made online.</p>
+    <a class="volunteer-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdwrgISzyXLW6_xjTb3Oxq8M2ld_xhMZnEUfjzNbhefNVmTvA/viewform" target="_blank" rel="noopener">📋 Interested in volunteering? Click here to sign up</a>
     <div class="foot-stars">★ ★ ★ ★</div>
   </div>
 </footer>
@@ -674,11 +721,11 @@ const ITEMS = [
 
   // ============ PARTNER ORGS ============
   { cat:"partner", sub:"FCPOA", name:"FCPOA — Laying the Keel Brown T-Shirt", desc:"First Class Petty Officers Association shirt",
-    priceLabel:"Ask in store", swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-layingkeel" },
+    price:10, swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-layingkeel" },
   { cat:"partner", sub:"FCPOA", name:"FCPOA — Old No. 1 Brown T-Shirt", desc:"First Class Petty Officers Association shirt",
-    priceLabel:"Ask in store", swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-oldno1" },
+    price:10, swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-oldno1" },
   { cat:"partner", sub:"FCPOA", name:"FCPOA — First to Lead First to Fight T-Shirt", desc:"First Class Petty Officers Association shirt",
-    priceLabel:"Ask in store", swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-firsttolead" },
+    price:10, swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-firsttolead" },
   { cat:"partner", sub:"Rising 6", name:"RISING 6 T-Shirt — Black", desc:"Short sleeve, RISING 6 logo",
     priceLabel:"1 x $20 / 2 x $30", swatches:["#1a1a1a"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", partner:true, photo:"partner-rising6-tshirt" },
 
