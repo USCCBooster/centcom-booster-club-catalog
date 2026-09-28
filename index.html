@@ -26,7 +26,6 @@
     --cat-patches: #1b2a6b;
     --cat-gifts:   #4a332a;
     --cat-partner: #c76a1f;
-    --cat-clearance: #c0392b;
   }
 
   *{ box-sizing:border-box; }
@@ -267,6 +266,16 @@
     border-color:var(--ink-black);
     color:var(--green-bright);
   }
+  .cat-btn.new-btn{
+    border-color:var(--green-bright);
+    color:var(--green-deep);
+    background:rgba(124,179,66,0.08);
+  }
+  .cat-btn.new-btn.active{
+    background:var(--green-bright);
+    border-color:var(--green-bright);
+    color:#0b0f0a;
+  }
 
   /* ---------- SECTIONS ---------- */
   .catalog{ max-width:1100px; margin:0 auto; padding:44px 24px 100px; }
@@ -376,12 +385,29 @@
     top:14px; left:-40px;
     width:170px;
     text-align:center;
-    background:var(--green-bright);
+    background:#cba876;
     color:#0b0f0a;
     font-family:'JetBrains Mono', monospace;
     font-size:9.5px;
     font-weight:700;
     letter-spacing:.03em;
+    text-transform:uppercase;
+    padding:4px 0;
+    transform:rotate(-38deg);
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    z-index:2;
+  }
+  .new-ribbon{
+    position:absolute;
+    top:14px; left:-40px;
+    width:170px;
+    text-align:center;
+    background:var(--green-bright);
+    color:#0b0f0a;
+    font-family:'JetBrains Mono', monospace;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:.06em;
     text-transform:uppercase;
     padding:4px 0;
     transform:rotate(-38deg);
@@ -538,7 +564,8 @@
     <span class="announce-label">Announcements</span>
     <div class="announce-track">
       <span class="announce-item">📣 We're looking for a few good volunteers — no combat experience required, just the ability to make change and smile.</span>
-      <span class="announce-item">🪙 CENTCOM OG Coin is currently out of stock — restock coming soon!</span>
+      <span class="announce-item">🪙 Gator Coin &amp; Year of the Hammer Coin are out of stock — restocking next month!</span>
+      <span class="announce-item">🎄 New "Land of the Free" Christmas Ornament arriving October!</span>
     </div>
   </div>
 </div>
@@ -556,7 +583,7 @@
       <p class="hero-sub">Browse what's on the shelf before you head in. Whole-dollar pricing, no coins needed.</p>
       <div class="hero-meta">
         <div class="chip"><strong id="item-count">—</strong> Items Listed</div>
-        <div class="chip"><strong>6</strong> Categories</div>
+        <div class="chip"><strong>5</strong> Categories</div>
         <div class="chip hours-chip">🕐 Open <strong>Tue &amp; Thu</strong> · 1100–1200</div>
         <div class="chip">Updated <strong id="update-date"></strong></div>
       </div>
@@ -568,12 +595,12 @@
   <div class="filter-inner">
     <input type="search" id="searchInput" placeholder="Search the catalog...">
     <button class="cat-btn active" data-cat="all">All</button>
+    <button class="cat-btn new-btn" data-cat="new">✨ New Arrivals</button>
     <button class="cat-btn" data-cat="gear">CENTCOM Gear</button>
     <button class="cat-btn" data-cat="collectibles">Collectibles</button>
     <button class="cat-btn" data-cat="patches">Command Patches</button>
     <button class="cat-btn" data-cat="gifts">Gifts &amp; Specialties</button>
     <button class="cat-btn" data-cat="partner">Partner Orgs</button>
-    <button class="cat-btn" data-cat="clearance">Clearance</button>
   </div>
 </div>
 
@@ -609,9 +636,9 @@ const ITEMS = [
 
   // -- Tops --
   { cat:"gear", sub:"Tops", name:"CENTCOM Hoodie — Charcoal", desc:"Polyester, CENTCOM logo",
-    price:40, swatches:["#3b3b3b"], loc:"Clothing Rack — CENTCOM Tops Divider", photo:"gear-hoodie" },
-  { cat:"gear", sub:"Tops", name:"CENTCOM Hawaiian T-Shirt", desc:"CENTCOM branded",
-    price:75, loc:"Clothing Rack — CENTCOM Tops Divider", photo:"gear-hawaiian" },
+    price:40, swatches:["#3d3d40","#053428"], loc:"Clothing Rack — CENTCOM Tops Divider", photo:"gear-hoodie" },
+  { cat:"gear", sub:"Tops", name:"CENTCOM Hawaiian T-Shirt", desc:"Light blue, custom-made, CENTCOM branded",
+    price:75, loc:"Clothing Rack — CENTCOM Tops Divider", photo:"gear-hawaiian", comingSoon:true },
 
   // -- Polos --
   { cat:"gear", sub:"Polos", name:"CENTCOM Men's Callaway Mesh Polo", desc:"CGM451SU performance polo, CENTCOM logo",
@@ -621,7 +648,7 @@ const ITEMS = [
   { cat:"gear", sub:"Polos", name:"CENTCOM Men's Core 365 Performance Polo", desc:"Core365 88181 performance polo, CENTCOM logo",
     price:30, swatches:["#0E0E0E","#310716","#B97135"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-core365" },
   { cat:"gear", sub:"Polos", name:"CENTCOM Women's Stretch Piqué Polo", desc:"P&C LK560 performance polo, CENTCOM logo",
-    price:35, swatches:["#0E0E0E","#683164"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-womens" },
+    price:35, swatches:["#0E0E0E","#683164","#FF0000","#00B0F0"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-womens" },
   { cat:"gear", sub:"Polos", name:"CENTCOM Men's OGIO Performance Polo", desc:"OGIO Caliber 2.0 performance polo, CENTCOM logo",
     price:40, swatches:["#646568","#B32434","#292946","#0D0D0D"], loc:"Clothing Rack — CENTCOM Polos Divider", photo:"gear-polo-ogio" },
 
@@ -649,13 +676,17 @@ const ITEMS = [
   { cat:"gear", sub:"Accessories", name:"Paracord Lanyard", desc:"Paracord style, Service / CENTCOM branded — for badges",
     price:45, swatches:["#000000","linear-gradient(135deg,#000000 50%,#c9b28a 50%)","#002991","#DF0201","#0F253F"], loc:"Wall Hook", photo:"gear-lanyard-paracord" },
 
+  // -- Buckles --
+  { cat:"gear", sub:"Buckles", name:"CENTCOM Belt Buckle", desc:"Antique-gold belt buckle",
+    price:30, loc:"Display Case", photo:"gear-beltbuckle", isNew:true },
+
   // ============ COLLECTIBLES ============
   { cat:"collectibles", sub:"Coins", name:"CENTCOM OG Coin", desc:"CENTCOM challenge coin — 2.5 inches",
-    price:20, loc:"Display Case", photo:"collect-og-coin", comingSoon:true },
+    price:20, loc:"Display Case", photo:"collect-og-coin" },
   { cat:"collectibles", sub:"Coins", name:"Gator Coin", desc:"CENTCOM Gator challenge coin — 3 inches",
-    price:25, loc:"Display Case", photo:"collect-gator-coin" },
+    price:25, loc:"Display Case", photo:"collect-gator-coin", comingSoon:true },
   { cat:"collectibles", sub:"Coins", name:"Year of the Hammer Coin", desc:"Limited edition CENTCOM coin — 2.5 inches",
-    price:20, loc:"Display Case", photo:"collect-hammer-coin" },
+    price:20, loc:"Display Case", photo:"collect-hammer-coin", comingSoon:true },
 
   { cat:"collectibles", sub:"Medallion", name:"CENTCOM Emblem Medallion", desc:"CENTCOM emblem commemorative medallion",
     price:10, loc:"Display Case", photo:"collect-medallion" },
@@ -688,6 +719,8 @@ const ITEMS = [
     price:10, loc:"Display Case", photo:"gift-cigarcutter" },
   { cat:"gifts", sub:"Accessories", name:"Keychain — D-Clamp", desc:"Carabiner keychain, CENTCOM logo",
     price:5, loc:"Display Case", photo:"gift-keychain" },
+  { cat:"gifts", sub:"Accessories", name:"CENTCOM Gasparilla Beads", desc:"Metallic bead necklace, CENTCOM logo",
+    price:2, loc:"Display Case", photo:"gift-gasparilla-beads", isNew:true },
 
   { cat:"gifts", sub:"Glassware", name:"Shot Glass — Single", desc:"Single shot glass (1oz), CENTCOM logo",
     price:5, loc:"Display Case", photo:"gift-shotglass-single" },
@@ -711,6 +744,8 @@ const ITEMS = [
     price:5, loc:"Display Case", photo:"gift-coaster-bamboo" },
   { cat:"gifts", sub:"Home", name:"Cork Coaster", desc:"Cork coaster, CENTCOM logo",
     price:5, loc:"Display Case", photo:"gift-coaster-cork" },
+  { cat:"gifts", sub:"Home", name:"CENTCOM 'Land of the Free' Christmas Ornament", desc:"Gold-finished metal ornament, CENTCOM logo",
+    price:20, loc:"Display Case", photo:"gift-ornament", isNew:true, comingSoon:true },
 
   { cat:"gifts", sub:"Tools", name:"Multi-Tool Bottle Opener", desc:"Multi-function tool with bottle opener",
     price:12, loc:"Display Case", photo:"gift-multitool" },
@@ -719,42 +754,35 @@ const ITEMS = [
   { cat:"gifts", sub:"Tools", name:"Gerber Mini Tactical Folding Knife", desc:"Gerber brand mini tactical knife",
     price:30, loc:"Display Case", photo:"gift-knife" },
 
+  { cat:"gifts", sub:"Specialty", name:"WARGOD War Honey Pouches", desc:"On-the-go honey pouches from Wargod Nutrition",
+    price:2, loc:"Display Case", photo:"gift-wargod-honey", isNew:true },
+
   // ============ PARTNER ORGS ============
   { cat:"partner", sub:"FCPOA", name:"FCPOA — Laying the Keel Brown T-Shirt", desc:"First Class Petty Officers Association shirt",
     price:10, swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-layingkeel" },
   { cat:"partner", sub:"FCPOA", name:"FCPOA — Old No. 1 Brown T-Shirt", desc:"First Class Petty Officers Association shirt",
     price:10, swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-oldno1" },
-  { cat:"partner", sub:"FCPOA", name:"FCPOA — First to Lead First to Fight T-Shirt", desc:"First Class Petty Officers Association shirt",
-    price:10, swatches:["#5c3a21"], loc:"Clothing Rack — FCPOA Divider", partner:true, photo:"partner-fcpoa-firsttolead" },
   { cat:"partner", sub:"Rising 6", name:"RISING 6 T-Shirt — Black", desc:"Short sleeve, RISING 6 logo",
     priceLabel:"1 x $20 / 2 x $30", swatches:["#1a1a1a"], loc:"Clothing Rack — CENTCOM T-Shirts Divider", partner:true, photo:"partner-rising6-tshirt" },
-
-  // ============ CLEARANCE ============
-  { cat:"clearance", sub:"Clearance Items", name:"CENTCOM Yellow Sword T-Shirt — Black", desc:"Short sleeve, CENTCOM Yellow Sword logo",
-    price:5, swatches:["#1a1a1a"], loc:"Clothing Rack — Clearance Divider", clearance:true, photo:"clearance-yellowsword-tee" },
-  { cat:"clearance", sub:"Clearance Items", name:"CENTCOM Army T-Shirt — Black", desc:"Short sleeve, polyester Army / CENTCOM logo",
-    price:5, swatches:["#1a1a1a"], loc:"Clothing Rack — Clearance Divider", clearance:true, photo:"clearance-army-tee" },
-  { cat:"clearance", sub:"Clearance Items", name:"CENTCOM 40th Anniversary Polo / Older Polos", desc:"Performance polo, CENTCOM logo",
-    price:10, colorNote:true, loc:"Clothing Rack — Clearance Divider", clearance:true },
 ];
 
 const CAT_LABELS = {
+  new: "New Arrivals",
   gear: "CENTCOM Gear",
   collectibles: "Collectibles",
   patches: "Command Patches",
   gifts: "Gifts & Specialties",
-  partner: "Partner Organizations",
-  clearance: "Clearance"
+  partner: "Partner Organizations"
 };
 const CAT_COLORS = {
+  new: "#7cb342",
   gear: "#2d5f1e",
   collectibles: "#8a7420",
   patches: "#1b2a6b",
   gifts: "#4a332a",
-  partner: "#c76a1f",
-  clearance: "#c0392b"
+  partner: "#c76a1f"
 };
-const CAT_ORDER = ["gear","collectibles","patches","gifts","partner","clearance"];
+const CAT_ORDER = ["new","gear","collectibles","patches","gifts","partner"];
 
 const catalogEl = document.getElementById('catalog');
 const searchInput = document.getElementById('searchInput');
@@ -777,7 +805,9 @@ function cardHTML(item){
   const photoHTML = item.photo
     ? `<img src="images/${item.photo}.jpg" alt="${item.name}" loading="lazy">`
     : `<span class="initial">${initialLetter(item.name)}</span><span class="tag">photo pending</span>`;
-  const ribbon = item.clearance ? `<div class="sale-ribbon">Sale</div>` : (item.comingSoon ? `<div class="soon-ribbon">Coming Soon</div>` : ``);
+  const ribbon = item.comingSoon ? `<div class="soon-ribbon">Coming Soon</div>`
+    : (item.isNew ? `<div class="new-ribbon">New</div>`
+    : (item.clearance ? `<div class="sale-ribbon">Sale</div>` : ``));
   return `
     <div class="card ${item.partner ? 'partner' : ''}" data-cat="${item.cat}" data-name="${(item.name+' '+item.desc).toLowerCase()}">
       <div class="card-photo">
@@ -816,23 +846,32 @@ function render(){
 
   CAT_ORDER.forEach(cat => {
     if(activeCat !== 'all' && activeCat !== cat) return;
-    let items = ITEMS.filter(i => i.cat === cat);
+
+    let items, groupKeyFn;
+    if(cat === 'new'){
+      items = ITEMS.filter(i => i.isNew || i.comingSoon);
+      groupKeyFn = i => CAT_LABELS[i.cat];
+    } else {
+      items = ITEMS.filter(i => i.cat === cat);
+      groupKeyFn = i => i.sub;
+    }
     if(q) items = items.filter(i => i.name.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q) || i.sub.toLowerCase().includes(q));
     if(items.length === 0) return;
 
     anyResults = true;
     totalShown += items.length;
 
-    // group by subcategory, preserving first-seen order
+    // group, preserving first-seen order
     const subOrder = [];
     const bySub = {};
     items.forEach(i => {
-      if(!bySub[i.sub]){ bySub[i.sub] = []; subOrder.push(i.sub); }
-      bySub[i.sub].push(i);
+      const key = groupKeyFn(i);
+      if(!bySub[key]){ bySub[key] = []; subOrder.push(key); }
+      bySub[key].push(i);
     });
 
     const section = document.createElement('div');
-    section.className = 'section' + (cat === 'partner' ? ' partner' : '') + (cat === 'clearance' ? ' clearance' : '');
+    section.className = 'section' + (cat === 'partner' ? ' partner' : '');
     section.style.setProperty('--cat-color', CAT_COLORS[cat]);
     section.innerHTML = `
       <div class="section-head">
